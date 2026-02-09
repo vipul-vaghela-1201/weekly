@@ -1,0 +1,37 @@
+.summary-card {
+  border-left: 4px solid var(--color-deposit);
+}
+
+.settings-panel {
+  margin-bottom: 1.5rem;
+}
+
+.group-badge {
+  background-color: var(--color-group) !important;
+}
+
+.material-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.adjustment-panel {
+  margin-bottom: 1.5rem;
+}
+
+.customer-form {
+  margin-bottom: 1.5rem;
+}
+
+.tab-section {
+  animation: highlight 0.3s ease-in-out;
+}
+
+@keyframes highlight {
+  from {
+    background-color: rgba(13, 110, 253, 0.08);
+  }
+  to {
+    background-color: transparent;
+  }
+}
