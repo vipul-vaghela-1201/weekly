@@ -1,11 +1,13 @@
 export const calculateCustomerBalance = (customer, settings = {}) => {
   const lastWeek = Number(customer.lastWeekBalance || 0);
-  const business = Number(customer.thisWeekBusiness || 0);
+  const thisWeekBusinessCustomerView = Number(customer.thisWeekBusiness || 0);
   const adjustments = Number(customer.adjustments || 0);
-  let balance = lastWeek + business + adjustments;
+  let balance = lastWeek + adjustments - thisWeekBusinessCustomerView;
+
   let depositUsed = 0;
-  let creditAddedToDeposit = customer.creditAddedToDeposit || 0;
-  let deposit = Number(customer.deposit || 0);
+  let creditAddedToDeposit = Number(customer.creditAddedToDeposit || 0);
+  const baseDeposit = Number(customer.deposit || 0) + Number(customer.materialDeposit || 0);
+  let deposit = baseDeposit;
 
   if (customer.useDeposit && balance < 0) {
     const maxUsage = settings.enablePartialDeposit
@@ -16,7 +18,7 @@ export const calculateCustomerBalance = (customer, settings = {}) => {
     deposit -= depositUsed;
   }
 
-  if (customer.addToDeposit && balance > 0 && creditAddedToDeposit === 0) {
+  if (customer.addToDeposit && balance > 0) {
     creditAddedToDeposit = balance;
     deposit += balance;
     balance = 0;
@@ -67,13 +69,6 @@ export const recalculateGroup = (group, customers) => {
   };
 };
 
-export const checkOverpayment = (balance, payment) => {
-  if (balance < 0 && payment > Math.abs(balance)) {
-    return payment - Math.abs(balance);
-  }
-  return 0;
-};
-
 export const updateKeywordGroupMembers = (group, customers) => {
   if (!group.keyword) return group;
   const keyword = group.keyword.toLowerCase();
@@ -91,6 +86,5 @@ export const generateFinalReport = (customers) =>
     id: customer.id,
     name: customer.name,
     newBalance: customer.newBalance,
-    deposit: customer.deposit,
-    materialDeposit: customer.materialDeposit
+    deposit: customer.deposit
   }));

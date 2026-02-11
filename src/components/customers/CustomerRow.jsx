@@ -13,7 +13,13 @@ const CustomerRow = ({ customer, onUpdate, onDelete, enablePartialDeposit }) => 
     <tr>
       <td>{customer.id}</td>
       <td>{customer.name}</td>
-      <td><BalanceIndicator value={customer.lastWeekBalance} /></td>
+      <td>
+        <Form.Control
+          type="number"
+          value={customer.lastWeekBalance}
+          onChange={(event) => updateField('lastWeekBalance', event.target.value)}
+        />
+      </td>
       <td>
         <Form.Control
           type="number"
@@ -48,6 +54,13 @@ const CustomerRow = ({ customer, onUpdate, onDelete, enablePartialDeposit }) => 
           label="Add Credit"
           checked={customer.addToDeposit}
           onChange={(value) => updateField('addToDeposit', value)}
+        />
+      </td>
+      <td>
+        <Form.Control
+          value={customer.comment || ''}
+          onChange={(event) => updateField('comment', event.target.value)}
+          placeholder="Notes"
         />
       </td>
       <td>
