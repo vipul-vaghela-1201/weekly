@@ -8,13 +8,14 @@ const CustomerTable = ({ customers, onUpdate, onDelete, enablePartialDeposit }) 
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th>Last Week</th>
-          <th>This Week</th>
+          <th>Last Week (Business)</th>
+          <th>This Week (Customer)</th>
           <th>Adjustments</th>
-          <th>New Balance</th>
+          <th>Final Balance (Business)</th>
           <th>Deposit</th>
           <th>Use Deposit</th>
           <th>Add Credit</th>
+          <th>Comment</th>
           <th>Actions</th>
         </tr>
       </thead>

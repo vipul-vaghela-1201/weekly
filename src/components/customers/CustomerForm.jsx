@@ -10,7 +10,8 @@ const CustomerForm = ({ customers, onAdd }) => {
     lastWeekBalance: 0,
     deposit: 0,
     materialDeposit: 0,
-    thisWeekBusiness: 0
+    thisWeekBusiness: 0,
+    comment: ''
   });
   const [errors, setErrors] = useState({});
 
@@ -35,7 +36,8 @@ const CustomerForm = ({ customers, onAdd }) => {
       isGroup: false,
       groupMembers: [],
       overpaymentToDeposit: false,
-      overpaymentAmount: 0
+      overpaymentAmount: 0,
+      comment: formState.comment || ''
     });
     setFormState({
       id: '',
@@ -43,7 +45,8 @@ const CustomerForm = ({ customers, onAdd }) => {
       lastWeekBalance: 0,
       deposit: 0,
       materialDeposit: 0,
-      thisWeekBusiness: 0
+      thisWeekBusiness: 0,
+      comment: ''
     });
     setErrors({});
   };
@@ -106,6 +109,13 @@ const CustomerForm = ({ customers, onAdd }) => {
             type="number"
             value={formState.thisWeekBusiness}
             onChange={(event) => updateField('thisWeekBusiness', event.target.value)}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Comment</Form.Label>
+          <Form.Control
+            value={formState.comment}
+            onChange={(event) => updateField('comment', event.target.value)}
           />
         </Form.Group>
       </div>
